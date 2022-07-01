@@ -1,0 +1,23 @@
+export function get_movies_to_watch(){}
+export function get_shows_to_watch(){}
+
+function get_movie_metadata(movie_name){
+	// ping OMDB
+}
+function get_movie_torrentdata(movie_name){
+	// ping RARBG
+}
+function get_movie_info(movie_name){
+	let movie_info = {};
+  get_movie_metadata(movie_name);
+  get_movie_torrentdata(movie_name);
+  return movie_info;
+}
+function add_movie_db(movie_info){
+	// add to FB
+  // return is_success
+}
+export function add_movie(movie_name){
+	let movie_info = get_movie_info(movie_name);
+  return add_movie_db(movie_info);
+}
