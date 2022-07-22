@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Form, Button } from 'react-bootstrap';
 import { auth } from '../utils/firebase.js';
+import { user_db_section } from "../utils/firebase.js";
 
 
 
@@ -9,9 +10,18 @@ function Signup() {
     const [signup_password, set_signup_password] = useState("");
 
     function signup_user() {
-        auth.createUserWithEmailAndPassword(signup_email, signup_password).then((result) => {
-            console.log(result);
-        }).catch((error) => console.error());
+        auth.createUserWithEmailAndPassword(signup_email, signup_password).then((user_credential) => {
+            console.log(user_credential.user);
+
+            //add user section to database
+            const today = new Date();
+            const path_to_user_section_of_db = user_db_section(user_credential.user.uid);
+            path_to_user_section_of_db.set({
+                user_created: today
+            }).then((result) => {
+                console.log(result);
+            }).catch((error) => console.error(error));
+        }).catch((error) => console.error(error));
     }
 
     return (

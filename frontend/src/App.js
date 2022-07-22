@@ -2,7 +2,9 @@ import './App.css';
 import { useNavigate } from "react-router-dom";
 
 function App() {
-  useNavigate("/signup");
+  let navigate = useNavigate();
+
+  return (navigate("/signin"))
 }
 
 export default App;

@@ -16,3 +16,6 @@ const app = initializeApp(firestore_config);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 export const auth_provider = new EmailAuthProvider();
+
+export const user_db_section = (user_id) => db.collection("user_data").doc(user_id);
+
