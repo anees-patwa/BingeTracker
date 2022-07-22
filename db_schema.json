@@ -1,0 +1,39 @@
+user_data : Collection
+{
+	uid: String,
+	movies: Collection
+	{
+		movie_id: String,
+		is_watched: Boolean
+	},
+	tv_shows: Collection
+	{
+		show_id: String,
+		is_watched: Boolean,
+		is_bingeable: Boolean
+	},
+}
+
+movie_data : Collection
+{
+	name : String,
+	release_date : Date,
+	is_torrent_available : Boolean
+}
+
+tv_show_data : Collection
+{
+	name : String,
+	release_date : Date,
+	total_episodes: Int,
+	episodes_available: Int,
+	platforms : String[]
+}
+
+episode_data : Collection
+{
+	name : String,
+	show_id : String
+	release_date : Date,
+	is_available : Boolean
+}
