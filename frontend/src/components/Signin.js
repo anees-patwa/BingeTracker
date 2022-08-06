@@ -1,18 +1,27 @@
 import { useState } from "react";
 import { Form, Button } from 'react-bootstrap';
-import { auth } from '../utils/firebase.js';
-import { Link } from 'react-router-dom';
+import { fb_signInWithEmailAndPassword } from '../utils/firebase.js';
+import { useNavigate } from 'react-router-dom';
+
 
 
 
 function Signin() {
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
+    const navigate = useNavigate();
 
     function sign_in_user() {
-        auth.signInWithEmailAndPassword(loginEmail, loginPassword).then((result) => {
+        fb_signInWithEmailAndPassword(loginEmail, loginPassword).then((result) => {
             console.log(result);
-        }).catch((error) => console.error());
+            navigate("/home");
+        }).catch((error) => {
+            console.error(error);
+            switch (error.code) {
+                default:
+                    alert(error.message);
+            }
+        });
     }
 
     return (
@@ -27,11 +36,14 @@ function Signin() {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password" onChange={(e) => setLoginPassword(e.target.value)} />
                 </Form.Group>
-                <Button variant="primary" type="submit" onClick={() => sign_in_user()}>
+                <Button variant="primary" type="submit" onClick={(e) => {
+                    e.preventDefault();
+                    sign_in_user()
+                }}>
                     Submit
                 </Button>
             </Form>
-            <Button><Link to="/signup">Sign-up</Link></Button>
+            <Button onClick={() => navigate("/signup")}>No account? Sign-up</Button>
         </div>
     )
 }
