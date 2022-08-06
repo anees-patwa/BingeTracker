@@ -1,6 +1,7 @@
 user_data : Collection
 {
 	uid: String,
+	date_created: Date,
 	movies: Collection
 	{
 		movie_id: String,

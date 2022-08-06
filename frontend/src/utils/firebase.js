@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from 'firebase/firestore';
-import { getAuth, EmailAuthProvider } from 'firebase/auth';
+import { getFirestore, doc } from 'firebase/firestore';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 
 const firestore_config = {
     apiKey: "AIzaSyDTKQVhP_EcfvR3uNgmFpHORLLqoSjlFhU",
@@ -13,6 +13,13 @@ const firestore_config = {
 
 const app = initializeApp(firestore_config);
 
-export const db = getFirestore(app);
+const db = getFirestore(app);
+export const user_doc = (user_id) => doc(db, "user_data", user_id);
+
 export const auth = getAuth(app);
-export const auth_provider = new EmailAuthProvider();
+export const fb_createUserWithEmailAndPassword = (email, password) => createUserWithEmailAndPassword(auth, email, password);
+export const fb_signInWithEmailAndPassword = (email, password) => signInWithEmailAndPassword(auth, email, password);
+export const fb_onAuthStateChanged = (observer) => onAuthStateChanged(auth, observer);
+
+
+
