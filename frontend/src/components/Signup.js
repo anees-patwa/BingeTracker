@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { fb_createUserWithEmailAndPassword } from '../utils/firebase.js';
 import { user_doc } from "../utils/firebase.js";
 import { setDoc } from "firebase/firestore"
+import { regularRequest } from "../utils/front_end_api";
 
 
 
@@ -17,13 +18,12 @@ function Signup() {
             console.log(user_credential.user);
 
             //add user section to database
-            const today = new Date();
-            setDoc(user_doc(user_credential.user.uid), {
-                user_created: today
-            }).then((result) => {
-                console.log(result);
+            regularRequest("/users", "POST", {
+                id: user_credential.user.uid
+            }, (response) => {
+                console.log(response);
                 navigate("/home");
-            }).catch((error) => console.error(error));
+            })
         }).catch((error) => {
             console.error(error);
             switch (error.code) {
