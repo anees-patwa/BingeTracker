@@ -2,8 +2,6 @@ import { useState } from "react";
 import { Form, Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import { fb_createUserWithEmailAndPassword } from '../utils/firebase.js';
-import { user_doc } from "../utils/firebase.js";
-import { setDoc } from "firebase/firestore"
 import { regularRequest } from "../utils/front_end_api";
 
 
