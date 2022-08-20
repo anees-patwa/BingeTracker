@@ -1,4 +1,4 @@
-export var url = "http://localhost:3000";
+export var url = "http://localhost:5000/bingetracker/us-central1/app";
 
 export function regularRequest(handler, method, body, callback) {
     const http = new XMLHttpRequest();
